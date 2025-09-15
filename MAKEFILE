@@ -1,0 +1,31 @@
+.PHONY: build run docker-build docker-up docker-down docker-logs test
+
+# Local development
+build:
+	go build -o payment-system .
+
+run:
+	go run main.go
+
+# Docker commands
+docker-build:
+	docker-compose build
+
+docker-up:
+	docker-compose up -d
+
+docker-down:
+	docker-compose down
+
+docker-logs:
+	docker-compose logs -f app
+
+docker-restart:
+	docker-compose restart app
+
+# Full setup
+setup: docker-build docker-up
+
+# Test
+test:
+	go test ./...
